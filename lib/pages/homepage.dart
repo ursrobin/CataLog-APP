@@ -12,8 +12,10 @@ class MyHomepage extends StatelessWidget {
         title: const Text("Revsion App"),
         actions: <Widget>[
           IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.navigate_next_outlined),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.logout_rounded),
           ),
         ],
       ),
