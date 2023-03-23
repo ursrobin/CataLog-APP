@@ -2,7 +2,15 @@ import 'package:flutter/material.dart';
 // import 'package:r1/pages/homepage.dart';
 import '../utilities/routes.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  String uName = '';
+  bool changedButton = false;
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -17,10 +25,11 @@ class LoginPage extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            const Center(
+            Center(
               child: Text(
-                "Welcome",
-                style: TextStyle(
+                "Welcome $uName",
+                textAlign: TextAlign.center,
+                style: const TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                 ),
@@ -41,6 +50,10 @@ class LoginPage extends StatelessWidget {
                       label: Text('Username'),
                       hintText: 'Enter Username',
                     ),
+                    onChanged: (value) {
+                      uName = value;
+                      setState(() {});
+                    },
                   ),
                   TextFormField(
                     obscureText: true,
@@ -52,21 +65,61 @@ class LoginPage extends StatelessWidget {
                   const SizedBox(
                     height: 40,
                   ),
-                  ElevatedButton(
-                    onPressed: () => {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => MyHomepage(),
-                      //   ),
-                      // ),
-                      Navigator.pushNamed(context, MyRoutes.homeRoute),
+                  InkWell(
+                    onTap: () async {
+                      setState(() {
+                        changedButton = true;
+                      });
+                      await Future.delayed(
+                        const Duration(
+                          seconds: 1,
+                          milliseconds: 1,
+                        ),
+                      );
+                      // ignore: use_build_context_synchronously
+                      Navigator.pushNamed(context, MyRoutes.homeRoute);
                     },
-                    style: TextButton.styleFrom(
-                      minimumSize: const Size(150, 40),
+                    child: AnimatedContainer(
+                      duration: const Duration(seconds: 1),
+                      width: changedButton ? 50 : 150,
+                      height: 50,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Colors.deepPurple,
+                        borderRadius: changedButton
+                            ? BorderRadius.circular(50)
+                            : BorderRadius.circular(10),
+                      ),
+                      child: changedButton
+                          ? const Icon(
+                              Icons.done,
+                              color: Colors.white,
+                            )
+                          : const Text(
+                              "Login",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
                     ),
-                    child: const Text('Login'),
                   ),
+                  // ElevatedButton(
+                  //   onPressed: () => {
+                  //     // Navigator.push(
+                  //     //   context,
+                  //     //   MaterialPageRoute(
+                  //     //     builder: (context) => MyHomepage(),
+                  //     //   ),
+                  //     // ),
+                  //     Navigator.pushNamed(context, MyRoutes.homeRoute),
+                  //   },
+                  //   style: TextButton.styleFrom(
+                  //     minimumSize: const Size(150, 40),
+                  //   ),
+                  //   child: const Text('Login'),
+                  // ),
                 ],
               ),
             )
