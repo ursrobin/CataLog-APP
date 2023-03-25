@@ -15,7 +15,7 @@ class MyHomepage extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: const Icon(Icons.logout_rounded),
+            icon: const Icon(Icons.logout),
           ),
         ],
       ),
