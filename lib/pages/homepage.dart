@@ -10,7 +10,7 @@ class MyHomepage extends StatelessWidget {
     String name = "Robin";
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Revsion App"),
+        title: const Text("Catalog App"),
         actions: <Widget>[
           IconButton(
             onPressed: () {
