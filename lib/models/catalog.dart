@@ -1,4 +1,18 @@
-class item {
+class CatalogModel {
+  static final List<Item> product = [
+    Item(
+      id: 1,
+      name: 'iPhone 12 Pro',
+      desc: 'Apple iPhone 12th generation',
+      price: 999,
+      color: '#33505a',
+      imgUrl:
+          'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-12-pro-blue-hero?wid=940&hei=1112&fmt=png-alpha&qlt=80&.v=1604021661000',
+    ),
+  ];
+}
+
+class Item {
   final int id;
   final String name;
   final String? desc;
@@ -6,7 +20,7 @@ class item {
   final String? color;
   final String imgUrl;
 
-  item(
+  Item(
       {required this.id,
       required this.name,
       this.desc,
@@ -14,15 +28,3 @@ class item {
       this.color,
       required this.imgUrl});
 }
-
-final List<item> product = [
-  item(
-    id: 1,
-    name: 'iPhone 12 Pro',
-    desc: 'Apple iPhone 12th generation',
-    price: 999,
-    color: '#33505a',
-    imgUrl:
-        'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-12-pro-blue-hero?wid=940&hei=1112&fmt=png-alpha&qlt=80&.v=1604021661000',
-  ),
-];

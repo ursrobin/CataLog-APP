@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
+import '../models/catalog.dart';
 import '../widgets/drawer.dart';
+import '../widgets/itemwidget.dart';
 
 class MyHomepage extends StatelessWidget {
-  const MyHomepage({super.key});
-
   @override
   Widget build(BuildContext context) {
-    int time = 8;
-    String name = "Robin";
     return Scaffold(
       appBar: AppBar(
         title: const Text("Catalog App"),
@@ -20,15 +18,13 @@ class MyHomepage extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(
-        child: Text(
-          "Revesion is going on it'll take $time hours \n: by $name ",
-          textAlign: TextAlign.right,
-          style: const TextStyle(
-            color: Color.fromARGB(255, 5, 13, 255),
-            fontSize: 20,
-          ),
-        ),
+      // body: ItemWidget(item: products[0]),
+      body: ListView.builder(
+        padding: const EdgeInsets.all(14),
+        itemCount: CatalogModel.product.length,
+        itemBuilder: (context, index) {
+          return ItemWidget(item: CatalogModel.product[index]);
+        },
       ),
       drawer: MyDrawer(),
     );
