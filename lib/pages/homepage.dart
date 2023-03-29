@@ -45,17 +45,47 @@ class _MyHomepageState extends State<MyHomepage> {
       // body: ItemWidget(item: products[0]),
       body: Padding(
         padding: const EdgeInsets.all(10),
-        child:
-            (CatalogModel.product != null && CatalogModel.product!.isNotEmpty)
-                ? ListView.builder(
-                    itemCount: CatalogModel.product?.length,
-                    itemBuilder: (context, index) {
-                      return ItemWidget(item: CatalogModel.product![index]);
-                    },
-                  )
-                : const Center(
-                    child: CircularProgressIndicator(),
-                  ),
+        child: (CatalogModel.product != null &&
+                CatalogModel.product!.isNotEmpty)
+            ? GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 16,
+                ),
+                itemCount: CatalogModel.product!.length,
+                itemBuilder: (context, index) {
+                  final item = CatalogModel.product![index];
+                  return Card(
+                    clipBehavior: Clip.antiAlias,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: GridTile(
+                      header: Container(
+                        color: Colors.deepPurple,
+                        padding: const EdgeInsets.all(12),
+                        child: Text(
+                          item.name,
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      footer: Container(
+                        color: Colors.black,
+                        padding: const EdgeInsets.all(12),
+                        child: Text(
+                          item.price.toString(),
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      child: Image.network(item.imgUrl),
+                    ),
+                  );
+                },
+              )
+            : const Center(
+                child: CircularProgressIndicator(),
+              ),
       ),
       drawer: MyDrawer(),
     );
