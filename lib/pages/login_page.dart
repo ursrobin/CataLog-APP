@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:velocity_x/velocity_x.dart';
 // import 'package:r1/pages/homepage.dart';
 import '../utilities/routes.dart';
 
@@ -37,12 +38,14 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
+      color: context.canvasColor,
       child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             Image.asset(
               'assets/images/login.png',
+              color: context.canvasColor,
+              colorBlendMode: BlendMode.color,
               fit: BoxFit.cover,
             ),
             const SizedBox(
@@ -108,7 +111,8 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: changedButton
                           ? BorderRadius.circular(50)
                           : BorderRadius.circular(8),
-                      color: Colors.deepPurple,
+                      // ignore: deprecated_member_use
+                      color: context.theme.buttonColor,
                       child: InkWell(
                         borderRadius: changedButton
                             ? BorderRadius.circular(50)

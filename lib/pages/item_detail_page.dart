@@ -14,7 +14,7 @@ class ItemDetail extends StatelessWidget {
         backgroundColor: Colors.transparent,
       ),
       bottomNavigationBar: Container(
-        color: Colors.white,
+        color: context.cardColor,
         child: ButtonBar(
           buttonPadding: EdgeInsets.zero,
           alignment: MainAxisAlignment.spaceBetween,
@@ -34,7 +34,7 @@ class ItemDetail extends StatelessWidget {
           ],
         ).p32(),
       ),
-      backgroundColor: Mythemes.creamColor,
+      backgroundColor: context.canvasColor,
       body: SafeArea(
           bottom: false,
           child: Column(
@@ -50,18 +50,18 @@ class ItemDetail extends StatelessWidget {
                   arcType: VxArcType.CONVEY,
                   child: Container(
                     width: context.screenWidth,
-                    color: Colors.white,
+                    color: context.cardColor,
                     child: Column(
                       children: [
                         catalogItem.name.text.xl4
-                            .color(Mythemes.darkBluishColor)
+                            .color(context.accentColor)
                             .bold
                             .make(),
                         catalogItem.desc!.text
                             .textStyle(context.captionStyle)
                             .xl
                             .make(),
-                        "Dolor occaecat reprehenderit anim et amet consequat amet eiusmod labore.Lorem non ipsum do nostrud adipisicing veniam incididunt pariatur aute."
+                        "Dolor occaecat reprehenderit anim et amet consequat amet eiusmod labore.Lorem non ipsum do nostrud adipisicing veniam incididunt pariatur aute.Lorem non ipsum do nostrud adipisicing veniam incididunt pariatur aute. Dolor occaecat reprehenderit anim et amet consequat amet eiusmod labore.Lorem non ipsum"
                             .text
                             .textStyle(context.captionStyle)
                             .make()
