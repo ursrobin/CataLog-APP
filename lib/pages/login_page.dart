@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:r1/main.dart';
 import 'package:velocity_x/velocity_x.dart';
 // import 'package:r1/pages/homepage.dart';
 import '../utilities/routes.dart';
@@ -37,113 +39,119 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: context.canvasColor,
-      child: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Image.asset(
-              'assets/images/login.png',
-              color: context.canvasColor,
-              colorBlendMode: BlendMode.color,
-              fit: BoxFit.cover,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Center(
-              child: Text(
-                "Welcome $uName",
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
+    return Scaffold(
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () => ThemeMode.light,
+      //   child: Icon(CupertinoIcons.moon),
+      // ),
+      body: Material(
+        color: context.canvasColor,
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Image.asset(
+                'assets/images/login.png',
+                color: context.canvasColor,
+                colorBlendMode: BlendMode.color,
+                fit: BoxFit.cover,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Center(
+                child: Text(
+                  "Welcome $uName",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 16,
-                horizontal: 32,
+              const SizedBox(
+                height: 20,
               ),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: <Widget>[
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        label: Text('Username'),
-                        hintText: 'Enter Username',
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 16,
+                  horizontal: 32,
+                ),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: <Widget>[
+                      TextFormField(
+                        decoration: const InputDecoration(
+                          label: Text('Username'),
+                          hintText: 'Enter Username',
+                        ),
+                        onChanged: (value) {
+                          uName = value;
+                          setState(() {});
+                        },
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Username can't be empty";
+                          }
+                          return null;
+                        },
                       ),
-                      onChanged: (value) {
-                        uName = value;
-                        setState(() {});
-                      },
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Username can't be empty";
-                        }
-                        return null;
-                      },
-                    ),
-                    TextFormField(
-                      obscureText: true,
-                      decoration: const InputDecoration(
-                        label: Text('Password'),
-                        hintText: 'Enter Password',
+                      TextFormField(
+                        obscureText: true,
+                        decoration: const InputDecoration(
+                          label: Text('Password'),
+                          hintText: 'Enter Password',
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Password can't be empty";
+                          } else if (value.length < 4) {
+                            return "Password length should be atleast of 4";
+                          }
+                          return null;
+                        },
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Password can't be empty";
-                        } else if (value.length < 4) {
-                          return "Password length should be atleast of 4";
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    Material(
-                      borderRadius: changedButton
-                          ? BorderRadius.circular(50)
-                          : BorderRadius.circular(8),
-                      // ignore: deprecated_member_use
-                      color: context.theme.buttonColor,
-                      child: InkWell(
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      Material(
                         borderRadius: changedButton
                             ? BorderRadius.circular(50)
                             : BorderRadius.circular(8),
-                        onTap: (() => moveToHome(context)),
-                        child: AnimatedContainer(
-                          duration: const Duration(seconds: 1),
-                          width: changedButton ? 50 : 150,
-                          height: 50,
-                          alignment: Alignment.center,
-                          child: changedButton
-                              ? const Icon(
-                                  Icons.done,
-                                  color: Colors.white,
-                                )
-                              : const Text(
-                                  "Login",
-                                  style: TextStyle(
+                        // ignore: deprecated_member_use
+                        color: context.theme.buttonColor,
+                        child: InkWell(
+                          borderRadius: changedButton
+                              ? BorderRadius.circular(50)
+                              : BorderRadius.circular(8),
+                          onTap: (() => moveToHome(context)),
+                          child: AnimatedContainer(
+                            duration: const Duration(seconds: 1),
+                            width: changedButton ? 50 : 150,
+                            height: 50,
+                            alignment: Alignment.center,
+                            child: changedButton
+                                ? const Icon(
+                                    Icons.done,
                                     color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
+                                  )
+                                : const Text(
+                                    "Login",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                    ),
                                   ),
-                                ),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
