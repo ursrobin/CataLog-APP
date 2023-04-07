@@ -5,6 +5,7 @@ import 'package:r1/pages/item_detail_page.dart';
 import 'package:velocity_x/velocity_x.dart';
 import '../../models/catalog.dart';
 import '../themes.dart';
+import 'add_to_cart_button.dart';
 import 'catalog_image.dart';
 
 class CatalogList extends StatelessWidget {
@@ -79,40 +80,5 @@ class CatalogItem extends StatelessWidget {
         ],
       ),
     ).color(context.cardColor).roundedLg.square(150).make().py(16);
-  }
-}
-
-class AddToCartButton extends StatefulWidget {
-  final Item catalog;
-  const AddToCartButton({super.key, required this.catalog});
-
-  @override
-  State<AddToCartButton> createState() => _AddToCartButtonState();
-}
-
-class _AddToCartButtonState extends State<AddToCartButton> {
-  final CartModel _cart = CartModel();
-  @override
-  Widget build(BuildContext context) {
-    bool isInCart = _cart.items.contains(widget.catalog) ? true : false;
-    return IconButton(
-      onPressed: () {
-        CatalogModel catModel = CatalogModel();
-        if (!isInCart) {
-          _cart.catalog = catModel;
-          _cart.addItem(widget.catalog);
-          setState(() {
-            isInCart = isInCart.toggle();
-          });
-        } else {
-          _cart.removeItem(widget.catalog);
-          setState(() {});
-        }
-      },
-      icon: isInCart
-          ? const Icon(CupertinoIcons.cart_badge_minus)
-          : const Icon(CupertinoIcons.cart_badge_plus),
-      color: isInCart ? Colors.green : Colors.black,
-    );
   }
 }

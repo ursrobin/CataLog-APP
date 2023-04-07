@@ -3,6 +3,8 @@ import 'package:r1/models/catalog.dart';
 import 'package:r1/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../widgets/home_widgets/add_to_cart_button.dart';
+
 class ItemDetail extends StatelessWidget {
   final Item catalogItem;
 
@@ -20,6 +22,7 @@ class ItemDetail extends StatelessWidget {
           alignment: MainAxisAlignment.spaceBetween,
           children: [
             '\$${catalogItem.price}'.text.bold.xl4.red800.make(),
+            AddToCartButton(catalog: catalogItem),
             ElevatedButton(
               onPressed: () {},
               style: ButtonStyle(
