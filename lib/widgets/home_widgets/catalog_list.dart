@@ -91,23 +91,28 @@ class AddToCartButton extends StatefulWidget {
 }
 
 class _AddToCartButtonState extends State<AddToCartButton> {
-  bool toggle = false;
+  final CartModel _cart = CartModel();
   @override
   Widget build(BuildContext context) {
+    bool isInCart = _cart.items.contains(widget.catalog) ? true : false;
     return IconButton(
       onPressed: () {
-        CartModel _cart = CartModel();
         CatalogModel catModel = CatalogModel();
-        _cart.catalog = catModel;
-        _cart.addItem(widget.catalog);
-        setState(() {
-          toggle = !toggle;
-        });
+        if (!isInCart) {
+          _cart.catalog = catModel;
+          _cart.addItem(widget.catalog);
+          setState(() {
+            isInCart = isInCart.toggle();
+          });
+        } else {
+          _cart.removeItem(widget.catalog);
+          setState(() {});
+        }
       },
-      icon: toggle
+      icon: isInCart
           ? const Icon(CupertinoIcons.cart_badge_minus)
           : const Icon(CupertinoIcons.cart_badge_plus),
-      color: toggle ? Colors.green : Colors.black,
+      color: isInCart ? Colors.green : Colors.black,
     );
   }
 }

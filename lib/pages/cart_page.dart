@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:r1/models/cartModel.dart';
+import 'package:r1/models/catalog.dart';
 import 'package:r1/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -40,6 +41,7 @@ class _CartTotal extends StatelessWidget {
           '\$${_cart.totalPrice}'
               .text
               .xl4
+              // ignore: deprecated_member_use
               .color(context.theme.accentColor)
               .make(),
           30.widthBox,
@@ -85,7 +87,10 @@ class _CartListState extends State<CartList> {
           title: _cart.items[index].name.text.make(),
           trailing: IconButton(
             icon: const Icon(Icons.remove_circle_outline),
-            onPressed: (() {}),
+            onPressed: (() {
+              _cart.removeItem(_cart.items[index]);
+              setState(() {});
+            }),
           ),
         );
       }),
