@@ -3,8 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:r1/utilities/routes.dart';
-import 'package:r1/widgets/drawer.dart';
-import 'package:r1/widgets/themes.dart';
 import '../models/catalog.dart';
 import 'package:velocity_x/velocity_x.dart';
 import '../widgets/home_widgets/catalog_header.dart';

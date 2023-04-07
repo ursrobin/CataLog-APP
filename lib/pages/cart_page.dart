@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:r1/models/cartModel.dart';
 import 'package:r1/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -25,7 +26,8 @@ class MyCart extends StatelessWidget {
 }
 
 class _CartTotal extends StatelessWidget {
-  const _CartTotal({super.key});
+  final _cart = CartModel();
+  // const _CartTotal({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +37,16 @@ class _CartTotal extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           // ignore: deprecated_member_use
-          '\$9999'.text.xl4.color(context.theme.accentColor).make(),
+          '\$${_cart.totalPrice}'
+              .text
+              .xl4
+              .color(context.theme.accentColor)
+              .make(),
           30.widthBox,
           ElevatedButton(
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
+                const SnackBar(
                   content: Text('Buy option is not available yet'),
                 ),
               );
@@ -66,18 +72,19 @@ class CartList extends StatefulWidget {
 }
 
 class _CartListState extends State<CartList> {
+  final CartModel _cart = CartModel();
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 5,
+      itemCount: _cart.items.length,
       itemBuilder: ((context, index) {
         return ListTile(
-          leading: Icon(
+          leading: const Icon(
             Icons.done,
           ),
-          title: 'Item $index'.text.make(),
+          title: _cart.items[index].name.text.make(),
           trailing: IconButton(
-            icon: Icon(Icons.remove_circle_outline),
+            icon: const Icon(Icons.remove_circle_outline),
             onPressed: (() {}),
           ),
         );

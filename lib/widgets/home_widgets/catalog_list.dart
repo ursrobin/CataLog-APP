@@ -1,9 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:r1/models/cartModel.dart';
 import 'package:r1/pages/item_detail_page.dart';
 import 'package:velocity_x/velocity_x.dart';
 import '../../models/catalog.dart';
 import '../themes.dart';
-// import '../../pages/item_detail_page.dart';
 import 'catalog_image.dart';
 
 class CatalogList extends StatelessWidget {
@@ -57,7 +58,8 @@ class CatalogItem extends StatelessWidget {
                   buttonPadding: EdgeInsets.zero,
                   alignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    '\$${catalog.price}'.text.bold.xl.make(),
+                    '\$${catalog.price}'.text.bold.make(),
+                    AddToCartButton(catalog: catalog),
                     ElevatedButton(
                       onPressed: () {},
                       style: ButtonStyle(
@@ -77,5 +79,35 @@ class CatalogItem extends StatelessWidget {
         ],
       ),
     ).color(context.cardColor).roundedLg.square(150).make().py(16);
+  }
+}
+
+class AddToCartButton extends StatefulWidget {
+  final Item catalog;
+  const AddToCartButton({super.key, required this.catalog});
+
+  @override
+  State<AddToCartButton> createState() => _AddToCartButtonState();
+}
+
+class _AddToCartButtonState extends State<AddToCartButton> {
+  bool toggle = false;
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: () {
+        CartModel _cart = CartModel();
+        CatalogModel catModel = CatalogModel();
+        _cart.catalog = catModel;
+        _cart.addItem(widget.catalog);
+        setState(() {
+          toggle = !toggle;
+        });
+      },
+      icon: toggle
+          ? const Icon(CupertinoIcons.cart_badge_minus)
+          : const Icon(CupertinoIcons.cart_badge_plus),
+      color: toggle ? Colors.green : Colors.black,
+    );
   }
 }
