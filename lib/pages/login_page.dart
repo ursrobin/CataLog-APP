@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:r1/main.dart';
 import 'package:velocity_x/velocity_x.dart';
-// import 'package:r1/pages/homepage.dart';
 import '../utilities/routes.dart';
 
 class LoginPage extends StatefulWidget {

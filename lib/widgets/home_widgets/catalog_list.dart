@@ -82,31 +82,24 @@ class CatalogItem extends StatelessWidget {
   }
 }
 
-class AddToCartButton extends StatefulWidget {
+class AddToCartButton extends StatelessWidget {
   final Item catalog;
-  const AddToCartButton({super.key, required this.catalog});
+  AddToCartButton({super.key, required this.catalog});
 
-  @override
-  State<AddToCartButton> createState() => _AddToCartButtonState();
-}
-
-class _AddToCartButtonState extends State<AddToCartButton> {
   final CartModel _cart = CartModel();
   @override
   Widget build(BuildContext context) {
-    bool isInCart = _cart.items.contains(widget.catalog) ? true : false;
+    bool isInCart = _cart.items.contains(catalog) ? true : false;
     return IconButton(
       onPressed: () {
         CatalogModel catModel = CatalogModel();
         if (!isInCart) {
           _cart.catalog = catModel;
-          _cart.addItem(widget.catalog);
-          setState(() {
-            isInCart = isInCart.toggle();
-          });
+          AddMutation(catalog);
+
+          isInCart = isInCart.toggle();
         } else {
-          _cart.removeItem(widget.catalog);
-          setState(() {});
+          _cart.removeItem(catalog);
         }
       },
       icon: isInCart
