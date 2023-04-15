@@ -23,10 +23,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: Mythemes.lightTheme(context),
       darkTheme: Mythemes.darkTheme(context),
-      themeMode: ThemeMode.light,
-      initialRoute: '/home',
+      themeMode: ThemeMode.system,
+      // initialRoute: '/home',
       routes: <String, WidgetBuilder>{
-        // '/': (context) => LoginPage(),
+        '/': (context) => LoginPage(),
         MyRoutes.homeRoute: (context) => MyHomepage(),
         MyRoutes.loginRoute: (context) => LoginPage(),
         MyRoutes.cartRoute: (context) => MyCart(),

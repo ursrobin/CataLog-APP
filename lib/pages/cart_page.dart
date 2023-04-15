@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:r1/models/cartModel.dart';
 
 import 'package:velocity_x/velocity_x.dart';
@@ -38,12 +39,16 @@ class _CartTotal extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           // ignore: deprecated_member_use
-          '\$${_cart.totalPrice}'
-              .text
-              .xl4
-              // ignore: deprecated_member_use
-              .color(context.theme.accentColor)
-              .make(),
+          VxConsumer(
+              builder: (context, obj, status) {
+                return '\$${_cart.totalPrice}'
+                    .text
+                    .xl4
+                    // ignore: deprecated_member_use
+                    .color(context.theme.accentColor)
+                    .make();
+              },
+              mutations: const {RemoveMutation}),
           30.widthBox,
           ElevatedButton(
             onPressed: () {
@@ -69,8 +74,8 @@ class _CartTotal extends StatelessWidget {
 class CartList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    VxState.watch(context, on: [RemoveMutation]);
     CartModel _cart = (VxState.store as MyStore).cart;
-
     return ListView.builder(
       itemCount: _cart.items.length,
       itemBuilder: ((context, index) {
@@ -82,7 +87,7 @@ class CartList extends StatelessWidget {
           trailing: IconButton(
             icon: const Icon(Icons.remove_circle_outline),
             onPressed: (() {
-              _cart.removeItem(_cart.items[index]);
+              RemoveMutation(_cart.items[index]);
             }),
           ),
         );

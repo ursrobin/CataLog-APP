@@ -11,7 +11,8 @@ class AddToCartButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    VxState.watch(context, on: [AddMutation]);
+    VxState.watch(context, on: [AddMutation, RemoveMutation]);
+
     CartModel _cart = (VxState.store as MyStore).cart;
     bool isInCart = _cart.items.contains(catalog) ? true : false;
     return IconButton(
@@ -19,13 +20,14 @@ class AddToCartButton extends StatelessWidget {
         if (!isInCart) {
           AddMutation(catalog);
         } else {
-          _cart.removeItem(catalog);
+          RemoveMutation(catalog);
         }
       },
       icon: isInCart
           ? const Icon(CupertinoIcons.cart_badge_minus)
           : const Icon(CupertinoIcons.cart_badge_plus),
-      color: isInCart ? Colors.green : Colors.black,
+      // ignore: deprecated_member_use
+      color: isInCart ? Colors.green : context.theme.accentColor,
     );
   }
 }

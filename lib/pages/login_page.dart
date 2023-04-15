@@ -37,10 +37,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () => ThemeMode.light,
-      //   child: Icon(CupertinoIcons.moon),
-      // ),
       body: Material(
         color: context.canvasColor,
         child: SingleChildScrollView(
@@ -48,8 +44,8 @@ class _LoginPageState extends State<LoginPage> {
             children: <Widget>[
               Image.asset(
                 'assets/images/login.png',
-                color: context.canvasColor,
-                colorBlendMode: BlendMode.color,
+                // color: context.canvasColor,
+                // colorBlendMode: BlendMode.color,
                 fit: BoxFit.cover,
               ),
               const SizedBox(
